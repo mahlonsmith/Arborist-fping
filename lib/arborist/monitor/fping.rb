@@ -28,7 +28,15 @@ module Arborist::Monitor::FPing
 	log_to :arborist
 
 	# The version of this library.
-	VERSION = '0.1.0'
+	VERSION = '0.1.1'
+
+	# Always request the node addresses.
+	USED_PROPERTIES = [ :addresses ].freeze
+
+	### Return the properties used by this monitor.
+	def self::node_properties
+		return USED_PROPERTIES
+	end
 
 	attr_accessor :identifiers
 
