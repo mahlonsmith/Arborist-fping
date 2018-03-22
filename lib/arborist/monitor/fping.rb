@@ -11,8 +11,6 @@
 #    Arborist::Monitor 'ping check' do
 #        every 20.seconds
 #        match type: 'host'
-#        include_down true
-#        use :addresses
 #        exec 'fping', '-e', '-t', '150'
 #        exec_callbacks( Arborist::Monitor::FPing )
 #    end

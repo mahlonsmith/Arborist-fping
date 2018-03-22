@@ -16,8 +16,8 @@ Arborist is a monitoring toolkit that follows the UNIX philosophy
 of small parts and loose coupling for stability, reliability, and
 customizability.
 
-This adds fping sweeping support to Arborist monitoring, which is an
-efficient means to check the ICMP reachability of many, many hosts
+This adds fping sweeping support to Arborist monitoring, providing an
+efficient method to check the ICMP reachability of many, many hosts
 simultaneously.
 
 It requires the fping binary to be installed in your path.  Use your
@@ -26,7 +26,7 @@ package manager of choice.
 
 ## Prerequisites
 
-* Ruby 2.2 or better
+* Ruby 2.4 or better
 
 
 ## Installation
@@ -54,8 +54,6 @@ timeout-per-host:
 	Arborist::Monitor 'ping check' do
 		every 10.seconds
 		match type: 'host'
-		include_down true
-		use :addresses
 		exec 'fping', '-e', '-t', '150'
 		exec_callbacks( Arborist::Monitor::FPing )
 	end
@@ -65,7 +63,7 @@ That's it.
 
 ## License
 
-Copyright (c) 2016, Michael Granger and Mahlon E. Smith
+Copyright (c) 2016-2018, Michael Granger and Mahlon E. Smith
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without
