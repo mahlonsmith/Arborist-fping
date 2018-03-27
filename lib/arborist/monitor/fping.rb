@@ -26,7 +26,7 @@ module Arborist::Monitor::FPing
 	log_to :arborist
 
 	# The version of this library.
-	VERSION = '0.1.1'
+	VERSION = '0.2.0'
 
 	# Always request the node addresses.
 	USED_PROPERTIES = [ :addresses ].freeze
@@ -38,18 +38,27 @@ module Arborist::Monitor::FPing
 
 	attr_accessor :identifiers
 
-	def exec_arguments( nodes )
-		self.log.debug "Building fping arguments for %d nodes" % [ nodes.size ]
+	### Arborist::Monitor API: Send addresses to the fping binary, after
+	### creating a map to re-associate them back to identifiers.
+	###
+	def exec_input( nodes, io )
+		self.log.debug "Building fping input for %d nodes" % [ nodes.size ]
 		self.identifiers = nodes.each_with_object({}) do |(identifier, props), hash|
 			next unless props.key?( 'addresses' )
 			address = props[ 'addresses' ].first
 			hash[ address ] = identifier
+			self.log.debug "%s -> %s" % [ identifier, address ]
 		end
 
-		return {} if self.identifiers.empty?
-		return self.identifiers.keys
+		return if self.identifiers.empty?
+
+		self.identifiers.keys.each{|ip| io.puts(ip) }
 	end
 
+
+	### Parse fping output, return a hash of RTT data, along
+	### with any detected errors.
+	###
 	def handle_results( pid, stdout, stderr )
 		# 8.8.8.8 is alive (32.1 ms)
 		# 8.8.4.4 is alive (14.9 ms)
