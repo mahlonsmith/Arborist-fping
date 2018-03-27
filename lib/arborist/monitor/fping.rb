@@ -26,7 +26,7 @@ module Arborist::Monitor::FPing
 	log_to :arborist
 
 	# The version of this library.
-	VERSION = '0.2.0'
+	VERSION = '0.1.2'
 
 	# Always request the node addresses.
 	USED_PROPERTIES = [ :addresses ].freeze
@@ -47,7 +47,6 @@ module Arborist::Monitor::FPing
 			next unless props.key?( 'addresses' )
 			address = props[ 'addresses' ].first
 			hash[ address ] = identifier
-			self.log.debug "%s -> %s" % [ identifier, address ]
 		end
 
 		return if self.identifiers.empty?
