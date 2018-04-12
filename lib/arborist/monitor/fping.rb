@@ -61,13 +61,14 @@ module Arborist::Monitor::FPing
 	def handle_results( pid, stdout, stderr )
 		# 8.8.8.8 is alive (32.1 ms)
 		# 8.8.4.4 is alive (14.9 ms)
+		# 1.1.1.1 is alive (236 ms)
 		# 8.8.0.1 is unreachable
 
 		return stdout.each_line.with_object({}) do |line, hash|
 			address, remainder = line.split( ' ', 2 )
 			identifier = self.identifiers[ address ] or next
 
-			if remainder =~ /is alive \((\d+\.\d+) ms\)/
+			if remainder =~ /is alive \((\d+(?:\.\d+)?) ms\)/
 				hash[ identifier ] = { rtt: Float( $1 ) }
 			else
 				hash[ identifier ] = { error: remainder.chomp }
