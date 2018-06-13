@@ -28,7 +28,8 @@ require 'rubygems/package_task'
 spec = Gem::Specification.new do |s|
 	s.email        = 'mahlon@martini.nu'
 	s.homepage     = 'http://bitbucket.org/mahlon/Arborist-fping'
-	s.authors      = [ 'Mahlon E. Smith <mahlon@martini.nu>', 'Michael Granger <ged@faeriemud.org>' ]
+	s.authors      = [ 'Mahlon E. Smith', 'Michael Granger' ]
+	s.email        = [ 'mahlon@martini.nu', 'ged@faeriemud.org' ]
 	s.platform     = Gem::Platform::RUBY
 	s.summary      = "Efficient ping strobing for Arborist"
 	s.name         = 'arborist-' + PROJECT
@@ -44,7 +45,7 @@ spec = Gem::Specification.new do |s|
 	EOF
 	s.required_ruby_version = '>= 2'
 
-	s.add_dependency 'arborist', "~> 1.0"
+	s.add_dependency 'arborist', "~> 0.1"
 end
 
 Gem::PackageTask.new( spec ) do |pkg|
