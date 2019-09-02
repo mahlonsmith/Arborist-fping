@@ -1,13 +1,12 @@
 # Arborist-fping
 
-home
-: http://bitbucket.org/mahlon/Arborist-fping
-
-code
-: http://code.martini.nu/Arborist-fping
-
-fping
-: http://fping.org/
+ * home:
+   * http://code.martini.nu/Arborist-fping
+ * mirrors:
+   * https://github.com/mahlonsmith/Arborist-fping
+   * https://hg.sr.ht/~mahlon/Arborist-fping
+ * fping:
+   * http://fping.org/
 
 
 ## Description
